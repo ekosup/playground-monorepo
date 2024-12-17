@@ -1,0 +1,94 @@
+{% extends 'asset/layout.html' %}
+
+{% block content %}
+    <div class="container mx-auto p-6">
+        <div class=""></div>
+        <div id="announcement" class="flex-row justify-center">
+            <div hx-get="{% url 'learning:announcement' %}"
+                 hx-trigger="load"
+                 hx-swap="outerHTML"
+            >
+                {# announcement content will be loaded here #}
+            </div>
+        </div>
+
+        <div class="my-4 p-2 min-w-full">
+            <div class="w-1/2 bg-white rounded-lg space-y-3 shadow-md dark:bg-gray-800 p-4">
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Rekap</h1>
+                <p class="text-sm text-slate-500 font-normal dark:text-slate-400">
+                    Rata-rata nilai kamu: <span class="bg-blue-500 text-white p-1 rounded">{{ average_score }}</span>
+                </p>
+                <p class="text-sm text-slate-500 font-normal dark:text-slate-400">
+                    Catatan: Secara keseluruhan kamu sudah berhasil menyelesaikan <abbr title="Total">{{ total }}</abbr>
+                    materi dengan baik.
+                </p>
+            </div>
+        </div>
+
+        {% if user_courses %}
+            <h2 class="p-2 font-bold text-white">Kelas yang diikuti</h2>
+            <div class="flex p-2 space-x-2">
+            {% for course in user_courses %}
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md w-1/3 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-5">
+                        <a href="{% url 'learning:course_detail' course.pk %}">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                {{ course.title }}
+                            </h5>
+                        </a>
+                        <p class="mb-3 text-sm text-slate-500 font-normal dark:text-slate-400">
+                            {{ subject.feedback }}
+                        </p>
+                        <p>
+                        </p>
+                        <div class="mt-4">
+                            <span class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Progress</span>
+                            <div class="relative pt-1">
+                                <div class="flex mb-2 items-center justify-between">
+                                    <div>
+                                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">
+                                            70%
+                                        </span>
+                                    </div>
+                                    <div class="text-xs font-semibold inline-block text-blue-600">
+                                        70% Complete
+                                    </div>
+                                </div>
+                                <div class="flex h-2 mb-4 overflow-hidden text-xs bg-gray-200 rounded">
+                                    <div style="width: 70%;"
+                                         class="flex flex-col text-center text-white bg-blue-600 shadow-none transition-all duration-500 ease-in-out"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+
+        <div class="flex justify-center space-x-2">
+            {% for subject in subjects %}
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md w-1/3 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-5">
+                        <a href="#">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                {{ subject.subject }}
+                            </h5>
+                        </a>
+                        <p class="mb-3 text-sm text-slate-500 font-normal dark:text-slate-400">
+                            {{ subject.feedback }}
+                        </p>
+                        <p>Score:
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded
+                                         dark:bg-blue-900 dark:text-blue-300"
+                            >
+                                {{ subject.score }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'asset/layout.html' %}
+
+{% block content %}
+    <div class="container mx-auto p-6">
+        <div class="bg-white shadow-lg rounded-lg p-8">
+            <h1 id="course-title" class="text-3xl font-bold mb-4 text-gray-900">{{ course.title }}</h1>
+            <p id="course-description" class="text-gray-700 mb-6 text-lg leading-relaxed">{{ course.description }}</p>
+            <div class="mb-6">
+                <span class="font-semibold text-gray-800">Instruktur:</span> 
+                <span id="course-instructor" class="text-gray-700 text-lg">{{ course.instructor.profile.name }}</span>
+            </div>
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800">Materi Kursus</h2>
+            <ul id="course-content" class="list-disc pl-5 space-y-3 text-gray-700">
+                {% for content in course.modules.all %}
+                    <li class="hover:bg-gray-100 rounded-lg p-2 transition duration-200 ease-in-out">
+                        <a href="#" class="font-medium text-blue-600 hover:underline">{{ content }}</a>
+                        <ul class="list-disc pl-5 mt-2 space-y-2">
+                            {% for subcontent in content.lessons.all %}
+                                <li>
+                                    <a href="#" class="text-gray-600 hover:text-blue-600 transition duration-200 ease-in-out">{{ subcontent }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

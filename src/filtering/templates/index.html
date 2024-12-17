@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="GET" action="{% url 'index' %}">
+  {{form.as_p}}
+  <input type="submit" value="Submit" class="btn btn-primary" />
+</form>
+
+<hr>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Genre</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in books %}
+      <tr>
+        <td>{{book.name}}</td>
+        <td>{{book.author.name}}</td>
+        <td>{{book.get_genre_display}}</td>
+        <td>${{book.price}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

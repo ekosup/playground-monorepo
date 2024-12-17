@@ -1,0 +1,4 @@
+Django==5.1.2
+Pillow
+django-unfold
+django-import-export

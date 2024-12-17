@@ -1,0 +1,8 @@
+<div class="w-full text-center ms-2 me-4 p-6 bg-blue-100 rounded shadow-md mb-5"
+     hx-get="{% url 'learning:dismiss_notification' %}"
+     hx-target="#announcement"
+     hx-swap="outerHTML"
+>
+    <h3 class="text-2xl font-bold text-gray-700 mb-2">{{ title }}</h3>
+    <p class="text-gray-600 text-sm">{{ detail }}</p>
+</div>

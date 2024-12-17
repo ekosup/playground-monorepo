@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pengantar TIK</title>
+    <link rel="stylesheet" href="{% static 'asset/css/output.css' %}">
+    <script src="https://unpkg.com/htmx.org@2.0.3"
+            integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq"
+            crossorigin="anonymous"></script>
+    <script src="{% static 'asset/js/preline.js' %}"></script>
+</head>
+
+<body class="bg-gray-50 transition-all duration-300 lg:hs-overlay-layout-open:ps-[260px] dark:bg-neutral-900">
+
+{% block layout %}
+{% endblock %}
+
+{% if show_footer %}
+	{% include 'asset/components/footer.html' %}
+{% endif %} 
+
+</body>
+</html>

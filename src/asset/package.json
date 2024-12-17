@@ -1,0 +1,19 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "tailwind": "tailwindcss -i ./input.css -o ./static/asset/css/output.css",
+    "copy-preline": "cp ./node_modules/preline/dist/preline.js ./static/asset/js/",
+    "tailwatch": "tailwindcss -i ./input.css -o ./static/asset/css/output.css --watch",
+    "dev": "npm run copy-preline && npm run tailwatch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.14"
+  },
+  "dependencies": {
+    "preline": "^2.5.1"
+  }
+}

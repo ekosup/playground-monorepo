@@ -1,7 +1,8 @@
+from django import forms
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from user.models import User
+from user.models import User, UserProfile
 
 
 class ProfileView(LoginRequiredMixin, DetailView):
@@ -17,3 +18,9 @@ class ProfileView(LoginRequiredMixin, DetailView):
         context['profile'] = self.get_object().profile
         context['is_profile'] = True
         return context
+
+
+class ProfilePictureForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['profile_pic']

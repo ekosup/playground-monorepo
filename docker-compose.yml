@@ -48,6 +48,21 @@ services:
       - "traefik.http.routers.django-http.middlewares=django-https-redirect"
       - "traefik.http.middlewares.django-https-redirect.redirectscheme.scheme=https"
       - "traefik.http.middlewares.django-https-redirect.redirectscheme.permanent=true"
+  traefik-dashboard:
+    image: traefik:v2.10
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.stage.devbppk.my.id`)"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.dashboard.middlewares=auth"
+      # Generate htpasswd: `htpasswd -nb admin password`
+      - "traefik.http.middlewares.auth.basicauth.users=admin:$apr1$BdmnTc8T$.ItXwT3P9hQrHspZhsD.S/"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    restart: always
 
 volumes:
   static_volume:

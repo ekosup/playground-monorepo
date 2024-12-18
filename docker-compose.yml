@@ -5,6 +5,7 @@ services:
     image: traefik:v2.10
     container_name: traefik
     command:
+      - "--log.level=DEBUG"  # Add debug logging
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
@@ -38,12 +39,14 @@ services:
       - 8000
     restart: always
     labels:
+      # Remove redirect temporarily
+      - "traefik.http.routers.django-http.middlewares=noop@internal"
       - "traefik.enable=true"
       # Router for HTTPS
       - "traefik.http.routers.django.rule=Host(`www.stage.devbppk.my.id`) || Host(`stage.devbppk.my.id`)"
       - "traefik.http.routers.django.entrypoints=websecure"
       - "traefik.http.routers.django.tls=true"
-      - "traefik.http.routers.django.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.django.tls.certresolver=myresolver"
       - "traefik.http.services.django.loadbalancer.server.port=8000"
 
       # HTTP to HTTPS Redirect

@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: ./src
+    volumes:
+      - ./src:/app
+      - static_volume:/app/staticfiles
+    expose:
+      - 8000
+
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - static_volume:/app/staticfiles
+    ports:
+      - "80:80"
+    depends_on:
+      - django
+
+volumes:
+  static_volume:

@@ -3,6 +3,8 @@ Pillow
 django-unfold
 django-import-export
 django-filter
+django-storages
+boto3
 whitenoise
 gunicorn
 gevent

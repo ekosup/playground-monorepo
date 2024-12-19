@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'blog',  # Registering the blog module
 
     'import_export',  # Required for django-import-export package
+    'storages',  # Required for django-storages package
 ]
 
 MIDDLEWARE = [

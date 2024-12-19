@@ -150,6 +150,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 AWS_LOCATION = 'media'
 AWS_DEFAULT_ACL = 'public-read'
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'unsafe-none'
+AWS_S3_SIGNATURE_VERSION = "s3v4"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

@@ -130,17 +130,24 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-MEDIA_URL = 'media/'
+if DEBUG:
+    MEDIA_URL = 'media/'
+else:
+    MEDIA_URL = f'{os.getenv("AWS_S3_ENDPOINT_URL")}/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', '').strip()
-AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', '').strip()
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', '').strip()
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', '').strip()
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', '').strip()
+AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL', '').strip()
+AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', '').strip()
 AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN', '').strip()
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
+AWS_LOCATION = 'media'
+AWS_DEFAULT_ACL = 'public-read'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

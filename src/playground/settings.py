@@ -134,7 +134,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 if DEBUG:
     MEDIA_URL = 'media/'
 else:
-    MEDIA_URL = f'{os.getenv("AWS_S3_ENDPOINT_URL")}/'
+    MEDIA_URL = f'{os.getenv("AWS_S3_ENDPOINT_URL")}/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_FILE_STORAGE = 'playground.storages.MediaStorage'

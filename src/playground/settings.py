@@ -138,19 +138,15 @@ else:
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_FILE_STORAGE = 'playground.storages.MediaStorage'
+STORAGE_MEDIA_BUCKET = os.getenv('AWS_STORAGE_BUCKET_NAME', "media").strip("\n")
+
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', '').strip()
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', '').strip()
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', '').strip()
 AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL', '').strip()
-AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', '').strip()
-AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN', '').strip()
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'stage-portal'
-AWS_DEFAULT_ACL = 'public-read'
-SECURE_CROSS_ORIGIN_OPENER_POLICY = 'unsafe-none'
 AWS_S3_SIGNATURE_VERSION = "s3v4"
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'unsafe-none'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

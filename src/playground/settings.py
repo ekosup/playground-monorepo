@@ -134,7 +134,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 if DEBUG:
     MEDIA_URL = 'media/'
 else:
-    MEDIA_URL = f'{os.getenv("AWS_S3_ENDPOINT_URL")}/media/'
+    MEDIA_URL = f'{os.getenv("AWS_S3_ENDPOINT_URL")}/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_FILE_STORAGE = 'playground.storages.MediaStorage'
@@ -147,10 +147,11 @@ AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN', '').strip()
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-AWS_LOCATION = 'media'
+AWS_LOCATION = 'stage-portal'
 AWS_DEFAULT_ACL = 'public-read'
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'unsafe-none'
 AWS_S3_SIGNATURE_VERSION = "s3v4"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
